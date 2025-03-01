@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Reader</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: monospace;
+            white-space: pre-wrap;
+            padding: 20px;
+        }
+        #log {
+            background-color: #1e1e1e;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Log Reader</h1>
+    <div id="log">Carregando...</div>
+
+    <script>
+        async function loadLog() {
+            const logPath = prompt("Digite o caminho do arquivo de log (ou deixe em branco para o padrão):") || 'default.log';
+            const response = await fetch(`/log?path=${encodeURIComponent(logPath)}`);
+            const logContent = await response.text();
+            document.getElementById('log').textContent = logContent;
+        }
+
+        loadLog();
+    </script>
+</body>
+</html>
